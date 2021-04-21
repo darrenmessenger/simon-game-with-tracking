@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!------------Head---------->
+
+<head id="head">
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Game | Simon Game To Test Your Memory</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.1/css/hover-min.css" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,700,700i" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="https://cdn.emailjs.com/sdk/2.2.4/email.min.js"></script>
+  <script type="text/javascript">
+  ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
+  p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
+  };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+  n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","./assets/js/snowplow.js","snowplow"));
+  window.snowplow('newTracker', 'cf', 'localhost:9090', { // Initialise a tracker
+    appId: 'TEST'
+  });
+
+  <!--Track the page views every 5 seconds after 20 seconds-->
+  snowplow('enableActivityTracking', {
+  minimumVisitLength: 20,
+  heartbeatDelay: 5
+  });
+  snowplow('trackPageView');
+
+  window.addEventListener('error', function (e) {
+    window.snowplow('trackError', e.message); // and other arguments
+  })
+  </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).on('click', '#startReset', function() {
+      console.log("startReset Button...")
+      window.snowplow('trackStructEvent', 'startReset', 'click');
+    });
+
+    $(document).on('click', '#green', function() {
+      console.log("green...")
+      window.snowplow('trackStructEvent', 'green', 'click');
+    });
+
+    $(document).on('click', '#red', function() {
+      console.log("red...")
+      window.snowplow('trackStructEvent', 'red', 'click');
+    });
+
+    $(document).on('click', '#yellow', function() {
+      console.log("yellow...")
+      window.snowplow('trackStructEvent', 'yellow', 'click');
+    });
+
+    $(document).on('click', '#blue', function() {
+      console.log("blue...")
+      window.snowplow('trackStructEvent', 'blue', 'click');
+    });
+
+    window.addEventListener('error', function (e) {
+      window.snowplow('trackError', e.message); // and other arguments
+    })
+  </script>
+</head>
+
+<!------------Body---------->
+
+<body id="body">
+
+  <!------------Navigation---------->
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="#head" class="navbar-brand">Simon Memory Game</a>
+        <!--Navigation burger button for responsive design-->
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                              <span class="sr-only">Toggle navigation</span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                          </button>
+      </div>
+      <div class="navbar-collapse collapse" id="navbar">
+        <ul class="nav navbar-nav">
+          <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="index.html">Home</a></li>
+          <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#about">About</a></li>
+          <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#game">Game</a></li>
+          <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#contactme">Contact</a></li>
+        </ul>
+        <div class="navbar-header navbar-right hidden-xs">
+          <p class="navbar-text"><i>Let's Test Your Memory!</i></p>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!--Create a blue overlay for the Game and About section-->
+
+  <div class="bg aboutGame">
+    <div class="opaque-overlay-blue"></div>
+    <div class="container-fluid main-container">
+      <div class="row">
+
+        <!------------Game------------>
+
+        <div id="game" class="col-md-12 col-lg-7">
+          <div class="row">
+            <div class="col-xs-12">
+              <h2 id="information">Press Start/Reset to begin...</h2>
+            </div>
+          </div>
+          <div class="row ">
+            <div class="large-circle ">
+              <div>
+                <div class="game-row">
+                  <div id="green" class="gamebutton" onClick="playerClicked(this.id)"></div>
+                  <div id="red" class="gamebutton" onClick="playerClicked(this.id)"></div>
+                </div>
+                <div class="game-row">
+                  <button id="startReset" class="button" onclick="resetGamePressed()">Start/Reset</button>
+                  <h2 id="roundNumber">0</h2>
+                  <h3 id="hi_score">Highest Score: </h3>
+                </div>
+                <div class="game-row">
+                  <div id="yellow" class="gamebutton" onClick="playerClicked(this.id)"></div>
+                  <div id="blue" class="gamebutton" onClick="playerClicked(this.id)"></div>
+                </div>
+              </div>
+            </div>
+            <h3 id="timer">Time remaining: 10 seconds</h3>
+          </div>
+        </div>
+
+        <!------------About------------>
+
+        <div class="col-md-12 col-lg-4">
+          <div id="about">
+            <h2>About 'Simon' Game</h2>
+            <p>From Wikipedia, the free encyclopedia</p>
+            <p>Simon is an electronic game of memory skill invented by Ralph H. Baer and Howard J. Morrison,[1] with software programming by Lenny Cope. The device creates a series of tones and lights and requires a user to repeat the sequence. If the user
+              succeeds, the series becomes progressively longer and more complex. Once the user fails or the time limit runs out, the game is over. </p>
+            <a href="https://en.wikipedia.org/wiki/Simon_(game)" target="_blank">
+              <p class="read-more">Read more...</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!------------Contact Me------------>
+
+  <div id="contactme" class="bg">
+    <div class="opaque-overlay-yellow"></div>
+    <div class="container-fluid contact">
+      <div class="row">
+        <div class="col-xs-offset-1 col-xs-10 col-lg-4">
+          <div>
+            <h2>Would you like to contact me?</h2>
+            <p>If you like the game and would like to contact me about any other projects then leave your details below and I will get back to you.</p>
+          </div>
+          <div>
+            <!--Send an email when the submit button is pressed-->
+            <form onsubmit="return sendMail(this);" method="POST">
+              <label for="fullname">Name</label>
+              <input type="text" name="name" class="form-control" id="fullname" Placeholder="Your Name" required/>
+              <label for="emailaddress">Email Address</label>
+              <input type="email" name="emailaddress" class="form-control" id="emailaddress" Placeholder="Your Email Address" required/>
+              <label for="projectsummary">Project Summary</label>
+              <textarea rows="5" name="projectsummary" class="form-control" id="projectsummary" Placeholder="Details" required></textarea>
+              <button id="submit" class="button">Submit</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-xs-12 col-lg-7 gMap">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal for the email confirmation -->
+
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title text-center">SUCCESS!</h4>
+        </div>
+        <div class="modal-body">
+          <p>Your mail has been sent successfully! I will get back to you as soon as possible.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!------------Footer---------->
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-social">
+        <ul class="list-inline social-links">
+          <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="https://www.linkedin.com/in/darren-messenger-a4a59951" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+          <li><a href="https://github.com/darrenmessenger" target="_blank"><i class="fab fa-github"></i></a></li>
+          <li><a href="https://www.youtube.com/watch?v=1Yqj76Q4jJ4" target="_blank"><i class="fab fa-youtube"></i></a></li>
+          <li><a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
+        </ul>
+      </div>
+      <div class="copyright">
+        © 2018 - Website designed and built by Darren Messenger
+      </div>
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js " integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=" anonymous "></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js " integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa " crossorigin="anonymous "></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrK_RVqDig825KaoVLgHRMc-5NFu1z5hs&callback=initMap"></script>
+  <script src="assets/js/sendEmail.js"></script>
+  <script src="assets/js/maps.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+
+</html>

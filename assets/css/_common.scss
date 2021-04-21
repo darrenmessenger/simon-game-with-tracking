@@ -1,0 +1,125 @@
+/*******************************************COMMON FEATURES*******************************************/
+
+/*Set the default font and font size*/
+
+body {
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+}
+
+/*Background image */
+
+.bg {
+    background: url("../images/memorizing.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+/*Set the main container margins*/
+
+.main-container {
+    margin-bottom: 50px;
+}
+
+@mixin button($color,
+$size) {
+    width: $size;
+    height: $size / 2;
+    border: 1px solid $color;
+
+    @if $color==#e84610 {
+        color: #fff;
+    }
+    @else {
+        color: $color;
+    }
+}
+
+
+
+/*mixin that can be used to create different colour overlays*/
+
+@mixin opaque($buttonColour) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $buttonColour;
+}
+
+/*Use the mixin to create coloured overlays*/
+
+.opaque-overlay-red {
+    @include opaque(rgba(255, 0, 0, 0.7))
+}
+
+.opaque-overlay-yellow {
+    @include opaque( rgba(255, 255, 0, 0.8))
+}
+
+.opaque-overlay-green {
+    @include opaque( rgba(0, 128, 0, 0.8))
+}
+
+.opaque-overlay-blue {
+    @include opaque( rgba(0, 0, 255, 0.6))
+}
+
+/*Common Row features*/
+
+.row {
+    text-align: center;
+}
+
+/*Common button features*/
+
+.button {
+    display: inline-block;
+    padding: 0px 0px;
+    cursor: pointer;
+    outline: none;
+    color: white;
+    background-color: $simonRed;
+    box-shadow: 0 6px $simonDarkRed;
+    text: {
+        align: center;
+        decoration: none;
+    }
+    ;
+    border: {
+        style: solid;
+        width: 1px;
+        color: white;
+        radius: 15px;
+    }
+    ;
+}
+
+/*Common button hover features*/
+
+.button:hover {
+    background: #ff0000;
+    color: #000000;
+    transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -webkit-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+}
+
+;
+
+/*Common button active features - makes it look like the button has been clicked down */
+
+.button:active {
+    background-color: rgba(255, 0, 0, 0.9);
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
